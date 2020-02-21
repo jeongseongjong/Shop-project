@@ -79,6 +79,9 @@
 		<!-- hasRole(~~~)에 등록된 칼럼만 들어갈 수 있다.. 자격 권한 부여 -->
 		<security:intercept-url pattern="/auth/**"
 			access="permitAll" />
+			
+		<security:intercept-url pattern="/user/**"
+			access="permitAll" />	
 
 		<security:intercept-url pattern="/**"
 			access="permitAll" />

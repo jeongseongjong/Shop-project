@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.biz.shop.domain.Authorities;
 import com.biz.shop.domain.Users;
-import com.biz.shop.repository.AuthDao;
-import com.biz.shop.repository.UserDao;
+import com.biz.shop.persistence.AuthRepository;
+import com.biz.shop.persistence.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthService {
 
 	private final BCryptPasswordEncoder passEncoder;
-	private final UserDao userDao;
-	private final AuthDao authDao;
+	private final UserRepository userDao;
+	private final AuthRepository authDao;
 	
 	// 먼젓번의 로직이 실행되지 않을시 실패로 보고 정해둔 곳으로 넘어가서 재실행한다.
 	@Transactional  
