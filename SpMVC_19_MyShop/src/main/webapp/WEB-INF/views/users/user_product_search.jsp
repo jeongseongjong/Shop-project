@@ -95,7 +95,7 @@ $(function(){
 
 		<!-- Page Features -->
 		<div class="row text-center">
-			<c:forEach var="B2C" items="${B2C_LIST}" varStatus="i">
+			<c:forEach var="sList" items="${searchList}" varStatus="i">
 				<div class="col-lg-3 col-md-6 mb-4">
 					<div class="card h-100">
 						<img class="card-img-top" src="http://placehold.it/500x325" alt="">
@@ -103,7 +103,7 @@ $(function(){
 							<h4 class="card-title">Card title</h4>
 							<div>
 								<c:choose>
-									<c:when test="${empty B2C_LIST}">
+									<c:when test="${empty sList}">
 										<tr>
 											<td colspan="6">상품 정보가 없습니다.</td>
 										</tr>
@@ -111,8 +111,8 @@ $(function(){
 									<c:otherwise>
 
 										<div class="B2C_LIST" >
-											<div>상품이름 : ${B2C.p_name}</div>
-											<div>상품가격 : ${B2C.p_iprice}</div>
+											<div>상품이름 : ${sList.p_name}</div>
+											<div>상품가격 : ${sList.p_iprice}</div>
 										</div>
 
 									</c:otherwise>
@@ -120,7 +120,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="card-footer">
-							<a href="${rootPath}/user/product/detail?id=${B2C.id}" class="btn basket btn-primary">보러만 가기</a>
+							<a href="${rootPath}/user/product/detail?id=${sList.id}" class="btn basket btn-primary">보러만 가기</a>
 						</div>
 					</div>
 				</div>

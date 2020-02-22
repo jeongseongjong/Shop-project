@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.biz.shop.domain.DeptVO;
 import com.biz.shop.domain.ProductVO;
 import com.biz.shop.service.ProductService;
 
@@ -42,5 +44,20 @@ public class B2C_Controller {
 		
 		return "users/user_product_detail";
 	}
+	
+	@RequestMapping(value="/search",method=RequestMethod.GET)
+	public String search(Model model, @RequestParam("search")String search) {
+		
+		List<ProductVO> searchList = proService.findByPName(search);
+		
+		model.addAttribute("searchList",searchList);
+		model.addAttribute("search",search);
+		log.debug("search한 검색어는 :" + searchList);
+		log.debug("검색어 ?" + search);
+		
+		
+		return "users/user_product_search";
+	}
+	
 	
 }
