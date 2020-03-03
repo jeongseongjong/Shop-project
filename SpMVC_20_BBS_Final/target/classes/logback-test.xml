@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- console에 log를 표시할 때 사용할 pattern 설정 -->
+	<appender name="myConsole"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 
+		logback level
+		
+		단계
+		ERROR
+		INFO
+		WARNING
+		DEBUG
+		TRACE
+		
+		만약 level을 INFO로 설정했을 경우
+		INFO 하위단계 (DEBUG/WARN/TRACE)의 메시지는 모두 무시
+		ex) log.debug("???")라고 설정하면 debug라고 했기 때문에 무시된다.
+	 -->
+	
+	<logger level="DEBUG" name="com.biz.bbs.service">
+		<appender-ref ref="myConsole"/>
+	</logger>
+	
+	<root level="DEBUG">
+		<appender-ref ref="myConsole"/>
+	</root>
+	
+</configuration>
