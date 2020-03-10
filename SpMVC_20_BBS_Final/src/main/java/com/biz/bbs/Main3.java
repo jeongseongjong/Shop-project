@@ -22,6 +22,9 @@ public class Main3 {
 			return 0;
 		}else {
 			
+			// add가 자기 자신의 메소드 이기때문에
+			// num(10) + add (10-1) 을 실행 했을때
+			// 10 + 9가 아닌 10 + ( num + add(num-1))이 된다.
 			return num + add(num -1);
 		}
 	}

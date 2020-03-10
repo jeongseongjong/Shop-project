@@ -83,6 +83,8 @@ public class BBsServiceImpl implements BBsService{
 		
 		for(BBsVO vo : tempList) {
 			log.debug(vo.toString());
+			// this
+			// 해당클래스내의 모든것을 호출할 수 있다
 			repList = this.selectRepl(vo, depth+1);
 			retList.addAll(repList);
 		}

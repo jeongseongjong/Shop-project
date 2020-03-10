@@ -45,10 +45,13 @@ public class Main {
 		// 부모 id(b_p_id)가 0인 리스트만 추출
 		List<BBsVO> pList = new ArrayList<BBsVO>();
 		
+		// BBsData가 들어있는 bbsList를 vo에 차례대로 주입
 		for(BBsVO vo : bbsList){
 			
+			// vo의 p_id(부모id)가 0 이라면
 			if(vo.getB_p_id() == 0) {
 				
+				// 형태만 있는 pList에 Data가 담긴 vo를 주입
 				pList.add(vo);
 				
 				System.out.println("홋쉬요기기기?? " + vo);

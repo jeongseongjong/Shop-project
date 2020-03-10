@@ -5,8 +5,12 @@ C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\26
 \SpMVC_19_MyShop\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\58792389.index
 \SpMVC_19_MyShop\src\main\java
+C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\312822107.index
+\Mocozi\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1648852999.index
 \SpMVC_20_BBS_Final\src\main\java
+C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3948879502.index
+\SpMVC_99_ StudyDiary\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4178999047.index
 \SpMVC_20_BBS_Final\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2194981335.index

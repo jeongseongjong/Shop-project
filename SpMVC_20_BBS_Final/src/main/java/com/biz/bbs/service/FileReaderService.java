@@ -19,8 +19,18 @@ public class FileReaderService {
 		Path path;
 
 		try {
+			
+			/*
+			 * Paths(파일구분자)
+			 * 파일경로의 사이사이를 쪼개어 주는역할
+			 * ex ) honey\moon\light 일경우 
+			 * 		File file = Paths.get("honey","moon","ligh").toFile();
+			 */
 			path = Paths.get(cr.getURI());
 
+			// readAllLines 
+			// BufferedReader와 같은역할
+			// close()를 할 필요가 없어 가독성이 뛰어나다
 			List<String> lines = Files.readAllLines(path);
 			List<BBsVO> bbsList = new ArrayList<BBsVO>();
 			for (String line : lines) {
