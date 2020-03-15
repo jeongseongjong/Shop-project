@@ -149,7 +149,7 @@ div.modal-header{
 
 								$.ajax({
 									url : "${rootPath}/comment/insert",
-									data : formData,
+									data : {cmtVO : formData},
 									type : "POST",
 									success : function(result) {
 										$("div.cmt-list").html(result)
