@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
-<aop-project name="SpMVC_20_BBS_Final"/>
-<aop-project name="SpMVC_90_ReadBookV1"/>
+<aop-project name="SpMVC_21_RestTemplete"/>
 <aop-project name="SpMVC_99_ StudyDiary"/>
 </aop-reference-model>
