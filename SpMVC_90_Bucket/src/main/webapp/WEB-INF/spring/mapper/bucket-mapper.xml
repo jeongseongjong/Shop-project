@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.bucket.dao.BucketDao">
+
+	<select id="findById" resultType="bucketVO">
+		SELECT * FROM tbl_bucket where b_id = #{b_id} 
+	</select>
+	
+	<insert id="insert" parameterType="bucketVO">
+		INSERT INTO tbl_bucket(
+		b_id,
+		b_subject,
+		b_content,
+		b_complete,
+		b_impression
+		) VALUES (
+		SEQ_BUCKET.NEXTVAL,
+		#{b_subject,jdbcType=VARCHAR},
+		#{b_content,jdbcType=VARCHAR},
+		#{b_complete,jdbcType=VARCHAR},
+		#{b_impression,jdbcType=VARCHAR}
+		)
+
+	</insert>
+
+	<update id="update" parameterType="bucketVO">
+		UPDATE tbl_bucket SET
+
+		b_subject = #{b_subject,jdbcType=VARCHAR},
+		b_content =	#{b_content,jdbcType=VARCHAR},
+		b_complete = #{b_complete,jdbcType=VARCHAR},
+		b_impression = #{b_impression,jdbcType=VARCHAR}
+
+		WHERE b_id = #{b_id}
+	</update>
+	
+	<update id="checkBox" parameterType="bucketVO">
+		UPDATE tbl_bucket SET
+		
+		b_complete = #{b_complete,jdbcType=VARCHAR}
+		
+		where b_id = #{b_id}
+	</update>
+	
+	<delete id="delete" parameterType="bucketVO">
+		DELETE FROM tbl_bucket 
+		WHERE b_id = #{b_id}
+	</delete>
+</mapper>
