@@ -109,15 +109,15 @@ public class BucketController {
 		return "redirect:/list";
 	}
 	
-	@RequestMapping(value="/checkBox",method=RequestMethod.GET)
-	public String checkBox(long b_id, Model model) {
-		
-		BucketVO bucketVO = bcService.findById(b_id);
-		
-		model.addAttribute("CHECK",bucketVO);
-		
-		return "bucket-include-list";
-	}
+//	@RequestMapping(value="/checkBox",method=RequestMethod.GET)
+//	public String checkBox(long b_id, Model model) {
+//		
+//		BucketVO bucketVO = bcService.findById(b_id);
+//		
+//		model.addAttribute("CHECK",bucketVO);
+//		
+//		return "bucket-include-list";
+//	}
 	
 	@RequestMapping(value="/checkBox",method=RequestMethod.POST)
 	public String checkBox(BucketVO bcVO) {
