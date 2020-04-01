@@ -7,4 +7,5 @@
 <aop-project name="SpMVC_24_ModelAttribute"/>
 <aop-project name="SpMVC_21_RestTemplete"/>
 <aop-project name="SpMVC_99_ StudyDiary"/>
+<aop-project name="SpMVC_25_Ajax_Junit"/>
 </aop-reference-model>
