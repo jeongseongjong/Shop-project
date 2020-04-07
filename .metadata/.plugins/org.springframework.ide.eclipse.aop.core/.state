@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
-<aop-project name="SpMVC_90_Bucket"/>
-<aop-project name="SpMVC_20_BBS_Final"/>
-<aop-project name="SpMVC_22_Ajax"/>
-<aop-project name="SpMVC_90_ReadBookV1"/>
-<aop-project name="SpMVC_24_ModelAttribute"/>
-<aop-project name="SpMVC_21_RestTemplete"/>
-<aop-project name="SpMVC_99_ StudyDiary"/>
+<aop-project name="SpMVC_26_Socket"/>
+<aop-project name="SpMVC_90_01"/>
+<aop-project name="SpMVC_26_SocketV2"/>
 <aop-project name="SpMVC_25_Ajax_Junit"/>
+<aop-project name="SpMVC_99_ StudyDiary"/>
 </aop-reference-model>

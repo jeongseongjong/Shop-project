@@ -5,7 +5,137 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2020-04-03T11:42:02Z</updated>
+  <updated>2020-04-07T07:10:20Z</updated>
+  <entry>
+    <title>Spring Data for Apache Solr Discontinued</title>
+    <link rel="alternate" href="https://spring.io/blog/2020/04/07/spring-data-for-apache-solr-discontinued" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Christoph Strobl</name>
+    </author>
+    <id>tag:spring.io,2020-03-26:4012</id>
+    <updated>2020-04-07T07:10:20Z</updated>
+    <content type="html">&lt;p&gt;Dear Spring Data Community,&lt;/p&gt;
+&lt;p&gt;We want to share news with you about the Spring Data for Apache Solr module.&lt;br/&gt;After its initial rise as one for the first community-led Spring Data projects and its later inception as one of the core modules, community interest, feature requests, and bug reports have declined.&lt;/p&gt;
+&lt;p&gt;In our effort to balance time (based on popularity and usage data of the projects we have) the module has seen only occasional updates and fixes for the past few years. This is why we are seeking volunteers who are willing to help maintain the module, putting Spring Data for Apache Solr back into community mode.&lt;/p&gt;
+&lt;p&gt;The module will remain a part of the Spring Data release trains Neumann and Ockham. We will continue shipping required updates and fixes for the next twelve (plus) months.&lt;/p&gt;
+&lt;p&gt;In case we&amp;rsquo;re not able to find a new maintainer by next year, we will move the project into the attic.&lt;br/&gt;At this point, thanks to everyone who contributed to Spring Data for Apache Solr in the past and, in case you&amp;rsquo;re willing to take the lead, don&amp;rsquo;t hesitate to contact us via the usual channels.&lt;/p&gt;
+&lt;p&gt;Thank you!&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
+  <entry>
+    <title>Getting Started With RSocket: Spring Boot Channels</title>
+    <link rel="alternate" href="https://spring.io/blog/2020/04/06/getting-started-with-rsocket-spring-boot-channels" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Ben Wilcock</name>
+    </author>
+    <id>tag:spring.io,2020-04-01:4021</id>
+    <updated>2020-04-06T00:08:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;strong&gt;Reading Time: about 6 minutes.&lt;br/&gt;Practice Time: about 20 minutes.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If, like me, you&amp;rsquo;re still at the beginning of your RSocket journey, check out the &lt;a href="https://github.com/rsocket/rsocket/blob/master/Motivations.md"&gt;motivations behind the RSocket protocol&lt;/a&gt;. This short but insightful document includes one message that resonates very strongly with me ? &amp;lsquo;a mismatched abstraction increases the cost of developing a system.&amp;rsquo;&lt;/p&gt;
+&lt;p&gt;From a software design point of view, RSocket&amp;rsquo;s four interaction models offer a significant benefit. It means we can model our component-to-component communications using the correct interaction model for each use case. This more productive model could save you lots of time and energy when coding!&lt;/p&gt;
+&lt;p&gt;So far, in this series, we&amp;rsquo;ve already explored &lt;a href="https://spring.io/blog/2020/03/09/getting-started-with-rsocket-spring-boot-client"&gt;request&lt;/a&gt;-&lt;a href="https://spring.io/blog/2020/03/02/getting-started-with-rsocket-spring-boot-server"&gt;response&lt;/a&gt;, &lt;a href="https://spring.io/blog/2020/03/16/getting-started-with-rsocket-spring-boot-fire-and-forget"&gt;fire-and-forget&lt;/a&gt;, and &lt;a href="https://spring.io/blog/2020/03/23/getting-started-with-rsocket-spring-boot-request-stream"&gt;request-stream&lt;/a&gt; messaging. Today you&amp;rsquo;ll add &lt;em&gt;channels&lt;/em&gt; to your client and server code. &lt;/p&gt;&lt;h3&gt;&lt;a href="#what-are-channels" class="anchor" name="what-are-channels"&gt;&lt;/a&gt;What Are Channels?&lt;/h3&gt;
+&lt;p&gt;Channels are bi-directional pipes that allow streams of data to flow in either direction. With channels, a data stream from client-to-server can coexist alongside a data stream from server-to-client. Channels have many real-world uses. Channels could carry video conferencing streams, send and receive two-way chat messages, synchronize data using deltas and diffs, or provide a means to report, observe, and monitor your system.&lt;/p&gt;
+&lt;p&gt;Channels in RSocket are no more complicated than streams or request-response. That said, the scenario you&amp;rsquo;ll implement below is slightly more complicated than you&amp;rsquo;ve attempted previously, so it&amp;rsquo;s best to understand it before you begin. &lt;/p&gt;
+&lt;p&gt;In the exercise that follows, the server streams messages to the client. The client controls the frequency of the messages in the server&amp;rsquo;s stream. It does this using a stream of &amp;lsquo;delay&amp;rsquo; settings. The settings in the client&amp;rsquo;s stream tell the server how long the pause should be between each message it sends. Think of it as a message frequency dial. With the frequency setting high, the pause is shorter, so you¡¯ll see lots of server-sent messages. With the frequency setting low, the pause is longer, so you¡¯ll see fewer server-sent messages. With that outcome in mind, let&amp;rsquo;s start coding.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;The full code sample is available on &lt;a href="https://github.com/benwilcock/spring-rsocket-demo"&gt;GitHub&lt;/a&gt;. The &lt;code&gt;RSocketController&lt;/code&gt; is in the &lt;code&gt;rsocket-server&lt;/code&gt; folder in the &lt;code&gt;io.pivotal.rsocketserver&lt;/code&gt; package. The &lt;code&gt;RSocketShellClient&lt;/code&gt; is in the &lt;code&gt;rsocket-client&lt;/code&gt; folder in the &lt;code&gt;io.pivotal.rsocketclient&lt;/code&gt; package.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h3&gt;&lt;a href="#step-1-add-the-channel-method-to-the-code-rsocketcontroller-code" class="anchor" name="step-1-add-the-channel-method-to-the-code-rsocketcontroller-code"&gt;&lt;/a&gt;Step 1: Add The Channel Method To The &lt;code&gt;RSocketController&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;In the server-side &lt;code&gt;RSocketController&lt;/code&gt; class, add a method called &lt;code&gt;channel()&lt;/code&gt; which accepts a &lt;code&gt;Flux&amp;lt;Duration&amp;gt;&lt;/code&gt; and returns a &lt;code&gt;Flux&amp;lt;Message&amp;gt;&lt;/code&gt;. This method signature ? flux-in, flux out ? identifies this method as an RSocket channel method. Annotate the method with &lt;code&gt;@MessageMapping()&lt;/code&gt; using the value &lt;code&gt;&amp;quot;channel&amp;quot;&lt;/code&gt;. The code for this method is below.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;    @MessageMapping(&amp;quot;channel&amp;quot;)&#xD;
+    Flux&amp;lt;Message&amp;gt; channel(final Flux&amp;lt;Duration&amp;gt; settings) {&#xD;
+        return settings&#xD;
+                    .doOnNext(setting -&amp;gt; log.info(&amp;quot;\nFrequency setting is {} second(s).\n&amp;quot;, setting.getSeconds()))&#xD;
+                    .switchMap(setting -&amp;gt; Flux.interval(setting)&#xD;
+                                                   .map(index -&amp;gt; new Message(SERVER, CHANNEL, index)))&#xD;
+                                                   .log();&#xD;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the code, the &lt;code&gt;.doOnNext()&lt;/code&gt; is listening to the stream of settings coming from the client. Each time a new &lt;code&gt;delay&lt;/code&gt; setting arrives, it writes a message to the log. The &lt;code&gt;.switchMap()&lt;/code&gt; creates a new Flux for each new setting. This new flux emits a new &lt;code&gt;Message&lt;/code&gt; object based on the &lt;code&gt;.interval()&lt;/code&gt; delay contained in the &lt;code&gt;delay&lt;/code&gt; setting. The server sends these new messages back to the client in the stream.&lt;/p&gt;&lt;h3&gt;&lt;a href="#step-2-add-the-channel-method-to-the-code-rsocketshellclient-code" class="anchor" name="step-2-add-the-channel-method-to-the-code-rsocketshellclient-code"&gt;&lt;/a&gt;Step 2: Add The Channel Method To The &lt;code&gt;RSocketShellClient&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;In the client-side &lt;code&gt;RSocketShellClient&lt;/code&gt; class, add a new &lt;code&gt;channel()&lt;/code&gt; method and annotate it with the &lt;code&gt;@ShellMethod()&lt;/code&gt; annotation. Add a description of the method&amp;rsquo;s purpose as the annotation value, as shown in the example below.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;    @ShellMethod(&amp;quot;Stream some settings to the server. Stream of responses will be printed.&amp;quot;)&#xD;
+    public void channel(){&#xD;
+&#xD;
+// Code goes here&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, in the method, add the code that creates the stream of settings. The code looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;Mono&amp;lt;Duration&amp;gt; setting1 = Mono.just(Duration.ofSeconds(1));&#xD;
+Mono&amp;lt;Duration&amp;gt; setting2 = Mono.just(Duration.ofSeconds(3)).delayElement(Duration.ofSeconds(5));&#xD;
+Mono&amp;lt;Duration&amp;gt; setting3 = Mono.just(Duration.ofSeconds(5)).delayElement(Duration.ofSeconds(15));&#xD;
+&#xD;
+Flux&amp;lt;Duration&amp;gt; settings = Flux.concat(setting1, setting2, setting3)&#xD;
+                                        .doOnNext(d -&amp;gt; log.info(&amp;quot;\nSending setting for {}-second interval.\n&amp;quot;, d.getSeconds()));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Each &lt;code&gt;Mono&lt;/code&gt; contains a single &lt;code&gt;Duration&lt;/code&gt; setting. Each duration controls the pause between each message coming from the server. There are 3 monos in total. The first contains a short pause setting of 1 second. The second has a more relaxed pause setting of 3 seconds, but this mono is told to delay the production of this duration by 5 seconds using the &lt;code&gt;.delayElement()&lt;/code&gt; method. The third mono contains a pause setting of 5 seconds, but won&amp;rsquo;t emit its duration until 15 seconds have passed. These 3 mono&amp;rsquo;s get concatenated into a single &lt;code&gt;Flux&lt;/code&gt; using the &lt;code&gt;.concat()&lt;/code&gt; method. A logging statement is added using &lt;code&gt;.doOnNext()&lt;/code&gt; so you can see what&amp;rsquo;s happening when the code is running.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Note: There are many ways to build a &lt;code&gt;Flux&lt;/code&gt; based stream, but for this tutorial, it¡¯s just something simple.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now you have the stream of settings inside the flux, add to the method the code required to communicate with the server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;disposable = this.rsocketRequester&#xD;
+                    .route(&amp;quot;channel&amp;quot;)&#xD;
+                    .data(settings)&#xD;
+                    .retrieveFlux(Message.class)&#xD;
+                    .subscribe(message -&amp;gt; log.info(&amp;quot;Received: {} \n(Type &amp;#39;s&amp;#39; to stop.)&amp;quot;, message));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you&amp;rsquo;ve been following the series, this code looks familiar by now. The &lt;code&gt;rsocketRequester&lt;/code&gt; is a global variable you built in the constructor. It provides your RSocket communication link with the server. The &lt;code&gt;.route()&lt;/code&gt; is set to &lt;code&gt;&amp;quot;channel&amp;quot;&lt;/code&gt; to match the message mapping in the server-side code. The &lt;code&gt;.data()&lt;/code&gt; is the stream of mono&amp;rsquo;s you created above. The &lt;code&gt;.retrieveFlux()&lt;/code&gt; is specifying that you expect a stream of &lt;code&gt;Message&lt;/code&gt; objects, and the &lt;code&gt;.subscribe()&lt;/code&gt; begins your subscription and ensures that each message received is printed to the log so you can see what&amp;rsquo;s happening. The &lt;code&gt;Disposable&lt;/code&gt; object created by the subscription is kept and used to control the channel. &lt;/p&gt;
+&lt;p&gt;You can see the complete code for the method &lt;a href="https://github.com/benwilcock/spring-rsocket-demo/blob/master/rsocket-client/src/main/java/io/pivotal/rsocketclient/RSocketShellClient.java"&gt;here&lt;/a&gt;. That&amp;rsquo;s all the code we need. Let&amp;rsquo;s run it!&lt;/p&gt;&lt;h3&gt;&lt;a href="#step-3-build-and-run-the-rsocket-server" class="anchor" name="step-3-build-and-run-the-rsocket-server"&gt;&lt;/a&gt;Step 3: Build And Run The RSocket Server&lt;/h3&gt;
+&lt;p&gt;Open a terminal window and move to the &lt;code&gt;rsocket-server&lt;/code&gt; directory and run the server as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint bash"&gt;cd rsocket-server&#xD;
+./mvnw clean package spring-boot:run -DskipTests=true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The server starts up on &lt;code&gt;localhost&lt;/code&gt; port &lt;code&gt;7000&lt;/code&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#step-4-build-and-run-the-rsocket-client" class="anchor" name="step-4-build-and-run-the-rsocket-client"&gt;&lt;/a&gt;Step 4: Build And Run The RSocket Client&lt;/h3&gt;
+&lt;p&gt;Open a &lt;em&gt;second&lt;/em&gt; terminal window and move to the &lt;code&gt;rsocket-client&lt;/code&gt; directory. From there, build and run the client as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint bash"&gt;cd rsocket-client&#xD;
+./mvnw clean package spring-boot:run -DskipTests=true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once booted, Spring Shell presents you with a new prompt:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint bash"&gt;shell:&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You request a channel from the server by typing &lt;code&gt;channel&lt;/code&gt; at the prompt. &lt;/p&gt;
+&lt;p&gt;The client creates its stream of delay timer settings and begins to send them to the server. Each duration in the outbound steam gets printed by the client and the server. The server sends back a stream of messages, which the client prints out to the log. The terminal on the client-side looks something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint none"&gt;shell:&amp;gt;channel&#xD;
+i.p.rsocketclient.RSocketShellClient :&#xD;
+&#xD;
+Sending setting for 1-second interval.&#xD;
+&#xD;
+i.p.rsocketclient.RSocketShellClient : Received: Message(origin=Server, interaction=Channel, index=0, created=1585304561)&#xD;
+(Type &amp;#39;s&amp;#39; to stop.)&#xD;
+&#xD;
+# removed log-lines&#xD;
+&#xD;
+i.p.rsocketclient.RSocketShellClient :&#xD;
+&#xD;
+Sending setting for 3-second interval.&#xD;
+&#xD;
+i.p.rsocketclient.RSocketShellClient : Received: Message(origin=Server, interaction=Channel, index=0, created=1585304568)&#xD;
+(Type &amp;#39;s&amp;#39; to stop.)&#xD;
+&#xD;
+# removed log-lines&#xD;
+&#xD;
+i.p.rsocketclient.RSocketShellClient :&#xD;
+&#xD;
+Sending setting for 5-second interval.&#xD;
+&#xD;
+2020-03-27 10:23:00.243 INFO 5680 --- [tor-tcp-epoll-1] i.p.rsocketclient.RSocketShellClient : Received: Message(origin=Server, interaction=Channel, index=4, created=1585304580)&#xD;
+(Type &amp;#39;s&amp;#39; to stop.)&#xD;
+&#xD;
+# removed log-lines
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To stop the channeling, type &lt;code&gt;s&lt;/code&gt; and then tap &lt;code&gt;Enter&lt;/code&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#step-5-tidy-up" class="anchor" name="step-5-tidy-up"&gt;&lt;/a&gt;Step 5: Tidy Up&lt;/h3&gt;
+&lt;p&gt;You can exit the &lt;code&gt;rsocket-client&lt;/code&gt; by typing &lt;code&gt;exit&lt;/code&gt; at the &lt;code&gt;shell:&amp;gt;&lt;/code&gt; prompt like this.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint bash"&gt;shell:&amp;gt;exit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can stop the &lt;code&gt;rsocket-server&lt;/code&gt; process by pressing &lt;code&gt;Ctrl-C&lt;/code&gt; in its terminal window.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-it-works" class="anchor" name="how-it-works"&gt;&lt;/a&gt;How It Works&lt;/h3&gt;
+&lt;p&gt;The client creates a sequence of 3 duration elements. The first duration setting gets emitted immediately, the second after 5 seconds have passed, and the third after 15 seconds have passed. Each time a new duration is emitted, it¡¯s logged to the console. This stream of settings gets sent to the server and controls the server&amp;rsquo;s generated stream of messages.&lt;/p&gt;
+&lt;p&gt;On the server-side, every time a new duration setting gets extracted from the client¡¯s stream, a new stream of messages is created and returned. The most recent setting sent from the client controls the time delay between each message in this server-sent stream. &lt;/p&gt;
+&lt;p&gt;The channeling stops when the subscription&amp;rsquo;s disposable object is disposed of by the client.&lt;/p&gt;&lt;h3&gt;&lt;a href="#final-thoughts" class="anchor" name="final-thoughts"&gt;&lt;/a&gt;Final Thoughts&lt;/h3&gt;
+&lt;p&gt;If you followed the whole series, you&amp;rsquo;ve now seen all four of &lt;a href="https://rsocket.io/"&gt;RSocket&amp;rsquo;s&lt;/a&gt; interaction models in action: &lt;a href="https://spring.io/blog/2020/03/09/getting-started-with-rsocket-spring-boot-client"&gt;request&lt;/a&gt;-&lt;a href="https://spring.io/blog/2020/03/02/getting-started-with-rsocket-spring-boot-server"&gt;response&lt;/a&gt;, &lt;a href="https://spring.io/blog/2020/03/16/getting-started-with-rsocket-spring-boot-fire-and-forget"&gt;fire-and-forget&lt;/a&gt;, &lt;a href="https://spring.io/blog/2020/03/23/getting-started-with-rsocket-spring-boot-request-stream"&gt;request-stream&lt;/a&gt;, and now channels too.&lt;/p&gt;
+&lt;p&gt;With these four communication styles at your disposal, you&amp;rsquo;re far less likely to encounter one of those pesky &amp;lsquo;mismatched abstraction&amp;rsquo; scenarios we discussed at the beginning. With RSocket in your toolbox, you¡¯ll have a flexible, low friction, high-performance messaging protocol you can use in your software ? one that¡¯s purpose-built for microservice architectures.&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Boot 2.3.0.M4 available now</title>
     <link rel="alternate" href="https://spring.io/blog/2020/04/03/spring-boot-2-3-0-m4-available-now" />
@@ -447,7 +577,7 @@ class ExampleIntegrationTests {&#xD;
     <id>tag:spring.io,2020-03-19:4001</id>
     <updated>2020-03-25T15:30:00Z</updated>
     <content type="html">&lt;div class="paragraph"&gt;
-&lt;p&gt;The Spring Boot team is actively working on a Kubernetes theme for the next 2.3.0 release. After &lt;a href="https://spring.io/blog/2020/01/27/creating-docker-images-with-spring-boot-2-3-0-m1"&gt;Docker images creation&lt;/a&gt; and &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.x-SNAPSHOT/reference/html/spring-boot-features.html#boot-features-graceful-shutdown"&gt;Graceful Shutdown support&lt;/a&gt;, it¡¯s now time to introduce Liveness and Readiness Probes support.&lt;/p&gt;
+&lt;p&gt;The Spring Boot team is actively working on a Kubernetes theme for the next 2.3.0 release. After &lt;a href="https://spring.io/blog/2020/01/27/creating-docker-images-with-spring-boot-2-3-0-m1"&gt;Docker images creation&lt;/a&gt; and &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.0.M4/reference/html/spring-boot-features.html#boot-features-graceful-shutdown"&gt;Graceful Shutdown support&lt;/a&gt;, it¡¯s now time to introduce Liveness and Readiness Probes support.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;With our 2.2.0 release, Spring Boot shipped with &lt;a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#health-groups"&gt;the Health Groups support&lt;/a&gt;, allowing developers to select a subset of health indicators and group them under a single, correlated, health status.&lt;/p&gt;
@@ -518,7 +648,7 @@ public class LocalCacheVerifier {
 &lt;/div&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;Components can also listen for those events with &lt;code&gt;@EventListener&lt;/code&gt; (or by implementing &lt;code&gt;ApplicationListener&lt;/code&gt;).
-Check out &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.x-SNAPSHOT/reference/html/spring-boot-features.html#boot-features-application-availability-state"&gt;the reference documentation for more information&lt;/a&gt;.&lt;/p&gt;
+Check out &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.0.M4/reference/html/spring-boot-features.html#boot-features-application-availability-state"&gt;the reference documentation for more information&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;This support ships with the &lt;code&gt;spring-boot&lt;/code&gt; module directly and is activated for all Spring Boot applications; this makes it available for all types of applications (web, batch, etc) and allows you to implement Probes that aren¡¯t necessarily tied to HTTP.&lt;/p&gt;
@@ -529,7 +659,7 @@ Check out &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.x-SNAPSHOT/ref
 &lt;h2 id="exposing-kubernetes-probes-with-spring-boot-actuator"&gt;&lt;a class="anchor" href="#exposing-kubernetes-probes-with-spring-boot-actuator"&gt;&lt;/a&gt;Exposing Kubernetes Probes with Spring Boot Actuator&lt;/h2&gt;
 &lt;div class="sectionbody"&gt;
 &lt;div class="paragraph"&gt;
-&lt;p&gt;You¡¯ll probably be interested in a very common use case: deploying a web application on Kubernetes and configuring HTTP Probes. Adding the Spring Boot Actuator dependency to your application is the only requirement! Actuator will use the Health support to configure &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.x-SNAPSHOT/reference/html/production-ready-features.html#production-ready-kubernetes-probes"&gt;Liveness and Readiness HTTP Probes&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You¡¯ll probably be interested in a very common use case: deploying a web application on Kubernetes and configuring HTTP Probes. Adding the Spring Boot Actuator dependency to your application is the only requirement! Actuator will use the Health support to configure &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.0.M4/reference/html/production-ready-features.html#production-ready-kubernetes-probes"&gt;Liveness and Readiness HTTP Probes&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;Actuator will gather the "Liveness" and "Readiness" information from the &lt;code&gt;ApplicationAvailabilityProvider&lt;/code&gt; and use that information in dedicated Health Indicators: &lt;code&gt;LivenessProbeHealthIndicator&lt;/code&gt; and &lt;code&gt;ReadinessProbeHealthIndicator&lt;/code&gt;. These indicators will be shown on the global health endpoint (&lt;code&gt;"/actuator/health"&lt;/code&gt;). They will also be exposed as separate HTTP Probes using Health Groups: &lt;code&gt;"/actuator/health/liveness"&lt;/code&gt; and &lt;code&gt;"/actuator/health/readiness"&lt;/code&gt;.&lt;/p&gt;
@@ -615,7 +745,7 @@ Check out &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.x-SNAPSHOT/ref
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="paragraph"&gt;
-&lt;p&gt;You should carefully consider tying external state to Liveness or Readiness and this is why Spring Boot is not adding any by default. Each application and deployment is different, but &lt;strong&gt;we&amp;#8217;re committed to providing guidance and adapt defaults with the help of the community&lt;/strong&gt; - check out &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.x-SNAPSHOT/reference/html/production-ready-features.html#production-ready-kubernetes-probes-external-state"&gt;the "Checking external state with Kubernetes Probes" section in our reference documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You should carefully consider tying external state to Liveness or Readiness and this is why Spring Boot is not adding any by default. Each application and deployment is different, but &lt;strong&gt;we&amp;#8217;re committed to providing guidance and adapt defaults with the help of the community&lt;/strong&gt; - check out &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.0.M4/reference/html/production-ready-features.html#production-ready-kubernetes-probes-external-state"&gt;the "Checking external state with Kubernetes Probes" section in our reference documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -623,7 +753,7 @@ Check out &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.x-SNAPSHOT/ref
 &lt;h2 id="available-in-spring-boot-2-3-0-m4"&gt;&lt;a class="anchor" href="#available-in-spring-boot-2-3-0-m4"&gt;&lt;/a&gt;Available in Spring Boot 2.3.0.M4&lt;/h2&gt;
 &lt;div class="sectionbody"&gt;
 &lt;div class="paragraph"&gt;
-&lt;p&gt;Coupled with Graceful Shutdown, this feature will help you with the lifecycle of applications and containers in Kubernetes - we&amp;#8217;ve started providing guidance around &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.x-SNAPSHOT/reference/html/deployment.html#cloud-deployment-kubernetes"&gt;Kubernetes deployment and configuration in the reference documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Coupled with Graceful Shutdown, this feature will help you with the lifecycle of applications and containers in Kubernetes - we&amp;#8217;ve started providing guidance around &lt;a href="https://docs.spring.io/spring-boot/docs/2.3.0.M4/reference/html/deployment.html#cloud-deployment-kubernetes"&gt;Kubernetes deployment and configuration in the reference documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="paragraph"&gt;
 &lt;p&gt;This new feature will be available with &lt;a href="https://github.com/spring-projects/spring-boot/milestone/166"&gt;our upcoming 2.3 milestone&lt;/a&gt;;  and we can¡¯t wait to hear from you!&lt;/p&gt;
@@ -1079,52 +1209,6 @@ New Response: Message(origin=Server, interaction=Stream, index=3, created=158392
 &lt;p&gt;The &lt;code&gt;RSocketController&lt;/code&gt; on the server-side examines the request message&amp;rsquo;s metadata for the &lt;code&gt;route&lt;/code&gt;. The route was set to &lt;code&gt;&amp;quot;stream&amp;quot;&lt;/code&gt; for this message, so the server passes the message to the corresponding &lt;code&gt;.stream(Message request)&lt;/code&gt; method. The server then proceeds to send a stream of messages to the client every second until the client asks it to stop.&lt;/p&gt;
 &lt;p&gt;The client can stop the stream at any time. In the &lt;code&gt;.s()&lt;/code&gt; method, this is done by calling &lt;code&gt;.dispose()&lt;/code&gt; on the &lt;code&gt;Disposable&lt;/code&gt; returned by the original stream subscription.&lt;/p&gt;&lt;h4&gt;&lt;a href="#final-thoughts" class="anchor" name="final-thoughts"&gt;&lt;/a&gt;Final Thoughts&lt;/h4&gt;
 &lt;p&gt;In this post, you learned how to build a request-stream capability with RSocket in Spring Boot. In the next post, we&amp;rsquo;ll add channel messaging. See you next time!&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Data Flow 2.5.0.M1 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2020/03/20/spring-cloud-data-flow-2-5-0-m1-released" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Ilayaperumal Gopinathan</name>
-    </author>
-    <id>tag:spring.io,2020-03-20:4004</id>
-    <updated>2020-03-20T17:39:56Z</updated>
-    <content type="html">&lt;p&gt;Spring Cloud Data Flow team is pleased to announce the first milestone release of 2.5.0.M1.&lt;/p&gt;
-&lt;p&gt;The first milestone release of 2.5.0 consists of performance improvements addressed at application status retrieval for streams in Cloud Foundry. This also involves revamping the runtime application view page along with better pagination for streams at the SCDF dashboard. You can see more information on these improvements on the recently released SCDF &lt;a href="https://spring.io/blog/2020/03/11/spring-cloud-data-flow-2-4-2-ga-released"&gt;2.4.2 GA&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This milestone release also consists of some important bug fixes mentioned in &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/releases/tag/v2.5.0.M1"&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Please note that Spring Cloud Data Flow 2.5.x is compatible only with the Spring Cloud Skipper 2.3.2.RELEASE and above. When upgrading Spring Cloud Data Flow 2.5.0.M1, Spring Cloud Skipper also needs to be updated to 2.3.2.RELEASE and above. The current milestone on Spring Cloud Skipper release is 2.4.0.M1.&lt;/p&gt;
-&lt;p&gt;What¡¯s coming next:&lt;/p&gt;
-&lt;p&gt;We are working on a feature to support application &lt;code&gt;metadata&lt;/code&gt; as part of the &lt;code&gt;Docker&lt;/code&gt; images. Currently, we support application whitelisting only via maven artifact. With this new feature, one can configure the application metadata when creating the docker image. &lt;/p&gt;
-&lt;p&gt;Support for &lt;code&gt;Azure AD&lt;/code&gt; as an identity provider is in the works.&lt;/p&gt;&lt;h2&gt;&lt;a href="#stay-in-touch-hellip" class="anchor" name="stay-in-touch-hellip"&gt;&lt;/a&gt;Stay in touch&amp;hellip;&lt;/h2&gt;
-&lt;p&gt;As always, we welcome feedback and contributions, so please reach out to us on &lt;a href="https://stackoverflow.com/questions/tagged/spring-cloud-dataflow"&gt;Stackoverflow&lt;/a&gt; or &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/issues"&gt;GitHub&lt;/a&gt; or via &lt;a href="https://gitter.im/spring-cloud/spring-cloud-dataflow"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Tools 4.6.0 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2020/03/20/spring-tools-4-6-0-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Martin Lippert</name>
-    </author>
-    <id>tag:spring.io,2020-03-20:4003</id>
-    <updated>2020-03-20T15:12:30Z</updated>
-    <content type="html">&lt;p&gt;Dear Spring Community,&lt;/p&gt;
-&lt;p&gt;I am happy to announce the 4.6.0 release of the Spring Tools 4 for Eclipse, Visual Studio Code, and Theia.&lt;/p&gt;
-&lt;p&gt;Highlights from this release include:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;(Spring Boot)&lt;/em&gt; performance: improved performance while scanning projects for symbols&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;(Spring Boot)&lt;/em&gt; performance: improved performance when multiple files change at once (e.g. after a switch to a different branch or a git pull + refresh)&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;(Eclipse)&lt;/em&gt; bugfix: source lookup for Spring Boot launch configs works again&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;(Eclipse)&lt;/em&gt; documentation: There is a new section in the user documentation that focuses on migrating an existing workspace from Spring Tool Suite 3 to Spring Tools 4: &lt;a href="https://github.com/spring-projects/sts4/wiki/STS3-Migration"&gt;https://github.com/spring-projects/sts4/wiki/STS3-Migration&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;To download the distribution for Eclipse and find links to the marketplace entries for Visual Studio Code and Theia, please go visit:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring Tools 4: &lt;a href="https://spring.io/tools/"&gt;https://spring.io/tools/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Detailed changes can be found here: &lt;a href="https://github.com/spring-projects/sts4/wiki/Changelog#2020-03-19-460-release"&gt;https://github.com/spring-projects/sts4/wiki/Changelog#2020-03-19-460-release&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Spring Tools 4.6.1 is scheduled to be released in late April 2020.&lt;/p&gt;
-&lt;p&gt;Enjoy!&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
