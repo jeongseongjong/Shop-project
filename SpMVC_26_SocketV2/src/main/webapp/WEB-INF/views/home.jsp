@@ -66,7 +66,10 @@
 			// alert(mJson.userList)
 
 			let userList = JSON.parse(mJson.userList)
+			
+			// #toList를 지워라
 			$("#toList").empty()
+			
 			$("#toList").append(
 					
 					// 동적 tag를 만드는 jquery 코드

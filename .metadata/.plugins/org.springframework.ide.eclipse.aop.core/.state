@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
-<aop-project name="SpMVC_26_Socket"/>
-<aop-project name="SpMVC_90_01"/>
 <aop-project name="SpMVC_26_SocketV2"/>
-<aop-project name="SpMVC_25_Ajax_Junit"/>
-<aop-project name="SpMVC_99_ StudyDiary"/>
+<aop-project name="SpMVC_27_Secure"/>
+<aop-project name="SpMVC_00_MyTemplate"/>
 </aop-reference-model>
