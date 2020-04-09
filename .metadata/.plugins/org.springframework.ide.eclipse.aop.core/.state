@@ -3,4 +3,5 @@
 <aop-project name="SpMVC_26_SocketV2"/>
 <aop-project name="SpMVC_27_Secure"/>
 <aop-project name="SpMVC_00_MyTemplate"/>
+<aop-project name="SpMVC_99_ StudyDiary"/>
 </aop-reference-model>

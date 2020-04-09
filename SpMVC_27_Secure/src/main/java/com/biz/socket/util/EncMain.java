@@ -52,7 +52,7 @@ public class EncMain {
 		String saveUserName = String.format("mysql.username=ENC(%s)",encUserName);
 		String savePassword = String.format("mysql.password=ENC(%s)",encPassword);
 		
-		/*
+		
 		try {
 			PrintWriter out = new PrintWriter(saveFile);
 			out.println(saveUserName);
@@ -64,7 +64,7 @@ public class EncMain {
 			e.printStackTrace();
 		}
 		scan.close();
-		*/
+		
 		System.out.println("db.connection.properties 저장 완료!! ");
 	}
 

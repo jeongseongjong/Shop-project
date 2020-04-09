@@ -19,6 +19,8 @@ C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\90
 \SpMVC_99_ StudyDiary\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2297115781.index
 \SpMVC_90_ReadBookV1\src\main\java
+C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4078084514.index
+\SpMVC_27_Secure\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1141438144.index
 \SpMVC_27_secure\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\405780723.index
@@ -47,3 +49,5 @@ C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\36
 \SpMVC26_Socket\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2337009536.index
 \SpMVC_19_MyShop\src\main\java
+C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2275913915.index
+\SpMVC_27_Secure\src\main\java

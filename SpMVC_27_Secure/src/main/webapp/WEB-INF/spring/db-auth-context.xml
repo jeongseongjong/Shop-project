@@ -55,7 +55,7 @@
 	 	<property name="fileEncoding" value="UTF-8"/>
 	 	<property name="locations">
 	 		<list>
-	 			<value>WEB-INF/spring/db.connection.properties</value>
+	 			<value>/WEB-INF/spring/db.connection.properties</value>
 	 		</list>
 	 	</property>
 	 </bean>
@@ -63,10 +63,21 @@
 
 	<!--  security 인증과 관련된 user DB 설정부분 -->
 	<!--  dataSource -->
-	<!--  driverClassName -->
+	<!--  driverClassName, url, username, password -->
+	<!-- 
+		&useSSL=false : 5.7에서 issue
+		보안연결을 설정하지 않으면 MySQL서버에 접근하지 못하던 문제를 해결방법
+		8.x에서는 사용하지 말아야 하는 옵션
+		
+		만약 사용을 하려면 다음 항목도 같이 추가해야 한다.
+		&allowPublicKeyRetieval=true;
+		
+		드라이버에 추가할 때는 다음과 같이
+		?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true;
+	 -->
 	<bean id="authDB" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://localhost:3306/secure?serverTimezone=Asia/Seoul&amp;useSSL=false"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/secure?serverTimezone=Asia/Seoul"/>
 		<property name="username" value="${mysql.username}"/>
 		<property name="password" value="${mysql.password}"/>
 	</bean>
