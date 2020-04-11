@@ -418,7 +418,7 @@
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="_h856UHr6Eeq8Xqg8A7KsaA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="student-mapper.xml" iconURI="platform:/plugin/org.eclipse.wst.xml.ui/icons/xmldoc.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart&quot; name=&quot;student-mapper.xml&quot; partName=&quot;student-mapper.xml&quot; title=&quot;student-mapper.xml&quot; tooltip=&quot;SpMVC_90_ScoreBoard/src/main/webapp/WEB-INF/spring/mapper/student-mapper.xml&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SpMVC_90_ScoreBoard/src/main/webapp/WEB-INF/spring/mapper/student-mapper.xml&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;543&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart&quot; name=&quot;student-mapper.xml&quot; partName=&quot;student-mapper.xml&quot; title=&quot;student-mapper.xml&quot; tooltip=&quot;SpMVC_90_ScoreBoard/src/main/webapp/WEB-INF/spring/mapper/student-mapper.xml&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SpMVC_90_ScoreBoard/src/main/webapp/WEB-INF/spring/mapper/student-mapper.xml&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;355&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>removeOnHide</tags>
           <tags>org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart</tags>
@@ -722,7 +722,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YRp8UnTAEeqKZ8XEiBFC7g" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_H0MNMHrHEeq8Xqg8A7KsaA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_j1Mr93LpEeqtm4GDGbM5XQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_KyNyIHwHEeqN1bLESapAAg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_j1Mr93LpEeqtm4GDGbM5XQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YRp8U3TAEeqKZ8XEiBFC7g" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -792,7 +792,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YRp8WnTAEeqKZ8XEiBFC7g" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_H0P3kHrHEeq8Xqg8A7KsaA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_j1MrpHLpEeqtm4GDGbM5XQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_KyQ1cHwHEeqN1bLESapAAg" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_j1MrpHLpEeqtm4GDGbM5XQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YRp8W3TAEeqKZ8XEiBFC7g" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
