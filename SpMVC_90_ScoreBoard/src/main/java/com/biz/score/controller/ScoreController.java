@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.biz.score.domain.ScoreVO;
+import com.biz.score.domain.StudentVO;
 import com.biz.score.service.ScoreService;
 import com.biz.score.service.StudentService;
 
@@ -21,6 +22,8 @@ public class ScoreController {
 
 	private final ScoreService scoreService;
 	private final StudentService studentSerivce;
+	StudentVO studentVO = new StudentVO();
+	ScoreVO scoreVO = new ScoreVO();
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String scoreList(Model model, long st_num) {

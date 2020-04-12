@@ -20,6 +20,5 @@ public class StudentVO {
 	private String st_name;
 	private long st_grade;
 	private long st_class;
-	private ScoreVO scoreVO;
 	
 }

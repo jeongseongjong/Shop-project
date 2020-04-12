@@ -5,6 +5,25 @@
 
 <mapper namespace="com.biz.score.dao.StudentDao">
 
+	<select id="join" resultType="studentVO">
+		SELECT s_num,st_name,
+		SUM(CASE WHEN s_subject = kor
+		THEN s_score ELSE 0 END) AS 'kor',
+		SUM(CASE WHEN s_subject ='eng'
+		THEN s_score ELSE 0 END) AS eng,
+		SUM(CASE WHEN s_subject ='math'
+		THEN s_score ELSE 0 END) AS math,
+		SUM(CASE WHEN s_subject ='science'
+		THEN s_score ELSE 0 END) AS science,
+		SUM(CASE WHEN s_subject ='history'
+		THEN s_score ELSE 0 END) AS history,
+		SUM(s_score) AS sum,
+		AVG(s_score) AS average
+		FROM tbl_score
+		LEFT JOIN tbl_student
+		ON tbl_student.st_num = tbl_score.s_num
+		GROUP BY s_num,st_name ;
+	</select>
 
 	<insert id="insert" parameterType="studentVO">
 		INSERT INTO `tbl_student`
@@ -13,7 +32,7 @@
 		`st_name`,
 		`st_grade`,
 		`st_class`)
-		 VALUES
+		VALUES
 		(
 		#{st_num},
 		#{st_name},

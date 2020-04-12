@@ -32,8 +32,6 @@
 				<div class="col-2">${list.st_name}</div>
 				<div class="col-2">${list.st_grade}</div>
 				<div class="col-2">${list.st_class}</div>
-				<div class="col-2">${list.s_subject}</div>
-				<div class="col-2">${list.s_score}</div>
 				<div class="col-2">
 					<a href="${rootPath}/student/update?st_num=${list.st_num}">수정</a>
 					<a href="${rootPath}/student/delete?st_num=${list.st_num}">삭제</a>

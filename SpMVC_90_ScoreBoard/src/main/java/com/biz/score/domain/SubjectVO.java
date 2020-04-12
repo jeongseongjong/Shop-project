@@ -13,9 +13,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class ScoreVO {
+public class SubjectVO {
 
-	private long s_num;
-	private SubjectVO subjectVO;
-	private long s_score;
+	private String kor;
+	private String Eeg;
+	private String math;
+	private String science;
+	private String history;
+	
 }
