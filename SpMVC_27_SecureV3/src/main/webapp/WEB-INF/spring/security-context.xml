@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
 	
-	<!-- spring security exception message 커스터 마이징 -->
+	<!-- spring security exception message 커스터마이징 -->
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
@@ -33,38 +33,17 @@
 	-->
 	<bean id="passwordEncoder" 
 			class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-			<constructor-arg index="0" value="4"></constructor-arg>
+			<constructor-arg index="0" value="4"/>
 	</bean>
 	
-	<!-- login을 수행할때 user DB로부터 사용자 정보 가져오기 설정 -->
-	<bean id="secureDao" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
-		<property name="dataSource" ref="authDB"/>
-		<property name="usersByUsernameQuery">
-			<value>
-				SELECT user_name AS username, 
-					user_pass as password, 
-					enabled
-				FROM tbl_users WHERE user_name=?
-			</value>
-		</property>
-		<property name="authoritiesByUsernameQuery">
-			<value>
-				SELECT username,authority
-				FROM authorities
-				WHERE username=?
-			</value>
-		</property>
-	</bean>
 	
-	<context:component-scan base-package="com.biz.sec.service.auth" />
+	<context:component-scan base-package="com.biz.sec.service.auth"/>
 	<bean id="authProvider" class="com.biz.sec.service.auth.AuthProviderImpl">
-	
 	</bean>
 	
 	<!-- 사용자 login을 검증 -->
 	<security:authentication-manager>
 		<security:authentication-provider ref="authProvider"/>
-
 	</security:authentication-manager>	
 	
 	<!-- 
@@ -127,19 +106,19 @@
 			password-parameter="password"
 		/>
 		<!-- 
-			logout을 실행했을 때는 반드시
-			invalidate-ession=tru
-			delete-cookies-true로 설정한다.
-			
-			delete-cookuies=true로 설정하지 않으면
-			웹브라우저에 저장된 쿠키를 탈취당하여
-			서버 공격에 사용될 수 있다.
-		 -->
+		logout을 실행했을때는 반드시
+		invalidate-session=true
+		delete-cookies=true로 설정을 한다.
+		
+		delete-cookies=true로 설정하지 않으면
+		웹브라우저에 저장된 쿠키를 탈취당하여
+		서버 공격에 사용될 수 있다.
+		-->
 		<security:logout
 			logout-url="/logout"
 			invalidate-session="true"
-			delete-cookies=""
-			logout-success-url=""
+			delete-cookies="true"
+			logout-success-url="/"
 		/>
 	</security:http>
 

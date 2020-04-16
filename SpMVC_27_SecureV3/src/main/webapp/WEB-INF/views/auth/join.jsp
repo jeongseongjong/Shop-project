@@ -69,6 +69,36 @@
 	border-color: #2ECC71;
 }
 
+.join_form .option {
+	text-align: right;
+	margin-right: 3px;
+
+}
+.join_form label[for="view_pass"]{
+
+ padding: 0 0 5px 2px;
+ cursor: pointer;
+ text-transform: uppercase;
+
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: capitalize;
+  color:white;
+}
+
+.join_form input[type="checkbox"]{
+  vertical-align: middle;
+  margin: -1px 5px 0 1px;
+
+}
+
+.join_form input[type='checkbox']:focus{
+  width:200px;
+
+}
+
+
 .join_form button {
 	
 	border:2px solid #2ECC71;
@@ -156,7 +186,9 @@ $(function(){
 	
 	// 현재 입력박스에서 포커스가 벗어났을때 발생하는 이벤트
 	$(document).on("blur", "#username",function(){
+		
 		let username = $(this).val()
+		
 		if(username == "") {
 			$("#m_username").text("아이디는 반드시 입력해야 합니다")
 			$("#username").focus()
@@ -165,17 +197,26 @@ $(function(){
 		
 		$.ajax({
 			
+			// 데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+			beforeSend : function(ajaxReq)
+            {   
+                ajaxReq.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            },
 			url : "${rootPath}/user/idcheck",
-			method : "GET",
+			method : "POST",
 			data : {username : username},
 			success : function(result) {
 				if(result == "EXISTS") {
-					$("#m_username").text("* 이미 가입된 사용자 이름입니다.")
+					
+					$("#m_username").text("* 이미 가입된 사용자이름 입니다.")
 					$("#m_username").css("color","red")
 					$("#username").focus()
 					return false
+					
 				} else {
+					
 					$("#m_username").text("* 사용가능한 ID 입니다.")
+					
 				}
 			},
 			error:function(){
@@ -187,16 +228,25 @@ $(function(){
 		
 	})
 	
-	let input_ref = $(input)
-	$("input#view_pass").click(function(){
-		let change= $(this).is(":checked")? "text" : "password";
+	// 현재 DOM 화면에 class가 view_pass인 모든것에 적용
+	$(".view_pass").each(function(index,input){
 		
-		let ref = $("<input type='"+change+"'/>")
-		.val(input_ref.val())
-		.insertBefore(input_ref);
-		
-		input_ref.remove();
-		input_ref = ref;
+		// 매개변수로 전달된 input을 선택하여
+		// 변수 $input에 임시 저장하라
+		let input_ref = $(input)
+		$("input#view_pass").click(function(){
+			let change = $(this).is(":checked") 
+					? "text" 
+						: "password";
+			// 가상의 input 생성
+			// <input type='text'> 또는 <input type='password'>
+			let ref = $("<input type='" + change + "' />")
+				.val(input_ref.val())
+				.insertBefore(input_ref);
+			
+			input_ref.remove();
+			input_ref = ref;
+		})	
 	})
 })
 </script>
@@ -219,17 +269,17 @@ $(function(){
 					placeholder="사용자 ID">
 		<div class="message" id="m_username"></div>
 		<input type="password" id="password" 
-					name="password" class="view_pass" 
+					name="password"  class="view_pass"
 					placeholder="비밀번호">
 		<input type="password" id="re_password" 
 					name="re_password" class="view_pass"
 					placeholder="비밀번호 한번 더~~">
 					
-		<div class="option">
+		<div class="option">					
 			<label for="view_pass">
-			<input type="checkbox" id="view_pass">비밀번호보이기</label>
-		</div>
-					
+			<input type="checkbox" id="view_pass">
+			비밀번호 보이기</label>
+		</div>			
 		<button type="button" id="btn-join">회원가입</button>
 		<button type="button" id="btn-loss">ID/비번찾기</button>
 	

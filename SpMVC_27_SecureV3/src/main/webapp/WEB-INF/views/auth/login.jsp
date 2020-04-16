@@ -2,13 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<%@ taglib uri="http://www.springframework.org/security/tags" 
+			prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" 
+			prefix="form" %>			
+
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/include-head.jspf" %>
-
 
 
 <link rel="stylesheet"
@@ -30,13 +33,14 @@ $(function(){
 				<span class="login">Log in</span> or <span class="sign-up">sign
 					up</span>
 			</h1>
-			<div class="input_layout">
 			<div>
-				<!-- 로그인이 잘못되었을때 EXCEPTION을 발생하는  속성-->
-				<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION }">
+				<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}" >
 					<span>${SPRING_SECURITY_LAST_EXCEPTION.message}</span>
 				</c:if>
 			</div>
+			
+			<div class="input_layout">
+			
 			<div class="input_box">
 				<label id="username">UserName</label> 
 				<input id="username" name="username" type="text"

@@ -39,8 +39,8 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
+@ToString
 public class UserDetailsVO implements UserDetails {
 
 	/*

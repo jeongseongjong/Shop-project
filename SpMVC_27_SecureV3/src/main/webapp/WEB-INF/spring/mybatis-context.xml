@@ -17,3 +17,9 @@
 	<mybatis-spring:scan base-package="com.biz.sec.persistance"/>
 
 </beans>
+
+
+
+
+
+
