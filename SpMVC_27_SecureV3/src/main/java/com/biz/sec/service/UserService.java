@@ -108,26 +108,32 @@ public class UserService {
 	@Transactional
 	public int update(UserDetailsVO userVO,String[] authList) {
 
+		// 기존에 등록되어 있던 Authentication을 oldAuth로 지정
 		Authentication oldAuth 
 			= SecurityContextHolder
 			.getContext()
 			.getAuthentication();
 		
+		// 기존에 등록되어있는 Authentication의 principal을 oldUserVO로 지정
 		UserDetailsVO oldUserVO 
 			= (UserDetailsVO) oldAuth.getPrincipal();
 		
+		// principal이 지정되어있는 oldUserVO에
+		// 새로 입력받은 text를 주입
 		oldUserVO.setEmail(userVO.getEmail());
 		oldUserVO.setPhone(userVO.getPhone());
 		oldUserVO.setAddress(userVO.getAddress());
 
+		// 업데이트 
 		int ret = userDao.update(userVO);
+		
 		// DB update가 성공하면
 		// 로그인된 session정보를 update 수행
 		if (ret > 0) {
 			
 			// ret = authDao.update(new ArrayList(Arrays.asList(authList)));
 			
-			List<AuthorityVO> authCollection = new ArrayList();
+			List<AuthorityVO> authCollection = new ArrayList<>();
 			for(String auth : authList) {
 				if(auth.isEmpty()) {
 					AuthorityVO authVO = AuthorityVO.builder()
