@@ -37,12 +37,19 @@ public class UserService {
 		this.authDao = authDao;
 
 		String create_user_table = " CREATE TABLE IF NOT EXISTS tbl_users ("
-				+ "	id bigint  PRIMARY KEY AUTO_INCREMENT, " + "	user_name varchar(50) UNIQUE, "
-				+ "	user_pass varchar(125), " + "   enabled boolean default true, " + "	email varchar(50), "
-				+ "	phone varchar(20), " + "	address varchar(125) " + " ) ";
+				+ "	id bigint  PRIMARY KEY AUTO_INCREMENT, " 
+				+ "	user_name varchar(50) UNIQUE, "
+				+ "	user_pass varchar(125), " 
+				+ " enabled boolean default true, " 
+				+ "	email varchar(50), "
+				+ "	phone varchar(20), " 
+				+ "	address varchar(125) " 
+				+ " ) ";
 
 		String create_auth_table = " CREATE TABLE IF NOT EXISTS authorities ("
-				+ "	id bigint PRIMARY KEY AUTO_INCREMENT," + "    username varchar(50)," + "    authority varchar(50)"
+				+ "	id bigint PRIMARY KEY AUTO_INCREMENT," 
+				+ " username varchar(50)," 
+				+ " authority varchar(50)"
 				+ " ) ";
 
 		userDao.create_table(create_user_table);
@@ -68,12 +75,30 @@ public class UserService {
 
 		// 회원가입 form에서 전달받은 password 값을 암호화 시키는 과정
 		String encPassword = passwordEncoder.encode(password);
-		UserDetailsVO userVO = UserDetailsVO.builder().username(username).password(encPassword).build();
+		
+		// form에서 전달받은 password를 username과 함께 VO에 저장
+		UserDetailsVO userVO = UserDetailsVO.builder()
+									.username(username)
+									.password(encPassword)
+									.build();
 
 		int ret = userDao.insert(userVO);
 		List<AuthorityVO> authList = new ArrayList<>();
-		authList.add(AuthorityVO.builder().username(userVO.getUsername()).authority("ROLE_USER").build());
-		authList.add(AuthorityVO.builder().username(userVO.getUsername()).authority("USER").build());
+		
+		// authList에 사용자이름과 권한을 주입한다.
+		authList.add(AuthorityVO.builder()
+				
+							// VO에서 입력받은 username을 가져온다.
+							.username(userVO.getUsername())
+							
+							// 권한 설정
+							.authority("ROLE_USER")
+							.build());
+		
+		authList.add(AuthorityVO.builder()
+						.username(userVO.getUsername())
+						.authority("USER")
+						.build());
 
 		authDao.insert(authList);
 		return ret;
@@ -83,6 +108,7 @@ public class UserService {
 	public boolean isExistsUserName(String username) {
 
 		UserDetailsVO userVO = userDao.findByUserName(username);
+		
 		// 이미 DB에 회원정보(username)이 저장되어 있다.
 		if (userVO != null && userVO.getUsername().equalsIgnoreCase(username)) {
 			return true;
@@ -98,7 +124,10 @@ public class UserService {
 	}
 
 	public boolean check_password(String password) {
-		UserDetailsVO userVO = (UserDetailsVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetailsVO userVO = (UserDetailsVO) SecurityContextHolder
+													.getContext()
+													.getAuthentication()
+													.getPrincipal();
 
 		log.debug(userVO.toString());
 		return passwordEncoder.matches(password, userVO.getPassword());
@@ -108,18 +137,26 @@ public class UserService {
 	public int update(UserDetailsVO userVO, String[] authList) {
 		int ret = userDao.update(userVO);
 
+		// 업데이트될 정보가 되었다면
 		if (ret > 0) {
 			List<AuthorityVO> authCollection = new ArrayList<>();
+			
+			// 배열로 선언된 authList를 auth에 하나씩 주입한다.
 			for (String auth : authList) {
+				// 주입된것이 비어있지 않다면
 				if (!auth.isEmpty()) {
+					// username과 주입받은 auth를 authVO에 주입
 					AuthorityVO authVO = AuthorityVO.builder()
-							.username(userVO.getUsername())
-							.authority(auth).build();
+													.username(userVO.getUsername())
+													.authority(auth)
+													.build();
 					authCollection.add(authVO);
 				}
 
 			}
+			// 기존의 정보를 삭제하고
 			authDao.delete(userVO.getUsername());
+			// 새로 입력받은 정보를 추가한다.
 			authDao.insert(authCollection);
 
 		}

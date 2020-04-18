@@ -1,6 +1,5 @@
 package com.biz.sec.persistance;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;

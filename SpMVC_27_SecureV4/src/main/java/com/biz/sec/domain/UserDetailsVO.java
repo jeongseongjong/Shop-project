@@ -60,6 +60,7 @@ public class UserDetailsVO implements UserDetails {
 	private boolean accountNonLocked;
 	private boolean credentialsNonExpired;
 	
+	// 계정이 가지고 있는 권한의 목록
 	private Collection<? extends GrantedAuthority> authorities;
 
 	private String email;
