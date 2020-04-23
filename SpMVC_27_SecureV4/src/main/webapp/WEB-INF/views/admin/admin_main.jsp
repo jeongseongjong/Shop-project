@@ -69,6 +69,8 @@ $(function(){
 	})
 	
 	// $("#auth_append").click();
+	
+	// ajax시 사용할 수 있는 함수 
 	$(document).on("click","#auth_append",function(){
 			
 			let auth_input = $("<input/>",
