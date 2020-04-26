@@ -102,11 +102,15 @@ public class JoinController {
 	public String join_last(
 			@ModelAttribute("userVO") UserDetailsVO userVO,Model model) {
 		
+		// userVO가 담긴 insert_getToken을 가져와서 email_token에 담는다.
 		String email_token = userService.insert_getToken(userVO);
 		
+		// userVO에 담긴 username을 암호화 하여
+		// username이라는 문자열로 model에 담아 join_email의 jsp에 날린다.
 		model.addAttribute("username",
 				PbeEncryptor.getEncrypt(userVO.getUsername()));
 		
+		// insert가 된 userVO데이터를 "My_Email_Secret"이라는변수에 실어  model로 join_email에 날린다.
 		model.addAttribute("My_Email_Secret",email_token);
 		model.addAttribute("JOIN","EMAIL_OK");
 		return "join/join_email";
@@ -125,6 +129,9 @@ public class JoinController {
 	@ResponseBody
 	@RequestMapping(value="/email_token_check",
 				method=RequestMethod.POST)
+	// jsp ajax에서 이메일의 인증토큰을 보내는 username, secret_key, secret_value를
+	// id, key, value로 받아서 userService의 email_token_ok에 담아 bKey에 주입하고
+	// 참이라면 "OK를 리턴하고 bKey가 가지않았다면 "FAIL"을 송신한다.
 	public String email_token_check(
 			@RequestParam("secret_id") String username,
 			@RequestParam("secret_key") String secret_key, 

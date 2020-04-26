@@ -57,6 +57,8 @@ $(function(){
 		})
 	})
 	
+	// 먼저 실행되는 화면에서 class라던지 id라던지 들어와있다.
+	// 당장의 view에서 있지 않기때문에 document를 사용하는 것이다.
 	$(document).on("click","tr.tr_user",function(){
 		let username = $(this).data("id")
 		$.get("${rootPath}/admin/user_detail_view/" + username, 
@@ -72,7 +74,6 @@ $(function(){
 			$("#admin_content").html(result)
 			alert("Update 성공!!")
 		})
-	
 	})
 	// $("#auth_append").click();
 	$(document).on("click","#auth_append",function(){
@@ -82,8 +83,6 @@ $(function(){
 			//		{text:'제거',class:'auth_delete'}))		
 			$("div#auth_box").append(auth_input)
 	})
-	
-	
 })
 
 </script>

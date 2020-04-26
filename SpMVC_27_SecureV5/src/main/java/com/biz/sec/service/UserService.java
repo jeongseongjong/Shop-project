@@ -211,10 +211,13 @@ public class UserService {
 
 	}
 
+	// 권한정보가 들어있는 List
 	private Collection<GrantedAuthority> getAuthorities(String[] authList) {
 
 		List<GrantedAuthority> authorities 
 			= new ArrayList<GrantedAuthority>();
+		
+		// 매개변수로 선언된 배열 authList를 반복문으로 auth에 주입한다.
 		for (String auth : authList) {
 			
 			if(!auth.isEmpty()) {
@@ -243,20 +246,31 @@ public class UserService {
 		UserDetailsVO userVO 
 				= userDao.findByUserName(strUserName);
 		
+		// 복호화된 email을 가져와 strEmail에 주입
 		String strEmail = PbeEncryptor.getDecrypt(email);
+		
+		// strEmail이 userVO에 담겨있는 Email과 같다면
 		if(strEmail.equalsIgnoreCase(userVO.getEmail())) {
 		
+			// userVO의 Enabled를 true값으로 셋팅하고
 			userVO.setEnabled(true);
+			// 업데이트해라
 			userDao.update(userVO);
 			
-			List<AuthorityVO> authList = new ArrayList();
+			// authList에 
+			List<AuthorityVO> authList = new ArrayList<>();
+			
+			// "ROLE_USER"를 담고
 			authList.add(AuthorityVO.builder()
 					.username(userVO.getUsername())
 					.authority("ROLE_USER").build());
 			
+			// "USER"를 담아서
 			authList.add(AuthorityVO.builder()
 					.username(userVO.getUsername())
 					.authority("USER").build());
+			
+			// insert후 true를 리턴하라
 			authDao.insert(authList);
 			return true;
 		}

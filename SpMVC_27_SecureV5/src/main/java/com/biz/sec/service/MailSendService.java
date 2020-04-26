@@ -116,7 +116,7 @@ public class MailSendService {
 		);
 		String to_email = email;
 		String subject = "봄나라 회원인증 메일";
-		 this.sendMail(to_email,subject,send_message);
+		this.sendMail(to_email,subject,send_message);
 		return send_message;
 		
 	}

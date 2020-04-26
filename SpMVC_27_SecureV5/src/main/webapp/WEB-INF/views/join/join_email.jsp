@@ -37,6 +37,8 @@
 			})
 		})
 		
+		// 컨트롤러의 join_last에서 model에 심어서 날아온 "JOIN"에 EMAIL_OK가 담겨있다면
+		// 버튼의 TEXT를 "인증 Email 다시 보내기"라고 해라
 		if("EMAIL_OK" == "${JOIN}") {
 			$("button.btn-auth").text("인증 Email 다시 보내기")
 		}
@@ -74,13 +76,12 @@ span#secret {
 			
 				<c:choose>
 					<c:when test="${JOIN == 'EMAIL_OK'}">
-						<p>
-							E-mail을 열어서 인증코드를 확인한 후 아래 입력란에 입력 후 인증 버튼을 클릭하세요 <span
-								id="secret">${My_Email_Secret}</span>
-								<div class="form-group"> 
-						<input id="email_ok" class="form-control" >
+						<p>E-mail을 열어서 인증코드를 확인한 후 아래 입력란에 입력 후 인증 버튼을 클릭하세요 
+							<span id="secret">${My_Email_Secret}</span>
+						<div class="form-group">
+							<input id="email_ok" class="form-control">
 							<button type="button" id="btn_email_ok" class="btn btn-success">인증하기</button>
-							</div>
+						</div>
 					</c:when>
 				</c:choose>
 			</fieldset>
