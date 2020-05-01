@@ -37,8 +37,8 @@ public class MySQLEnc {
 		String encUsername = pbEnc.encrypt(username);
 		String encPassword = pbEnc.encrypt(password);
 		
-		System.out.printf("username : %s \n, encUsername");
-		System.out.printf("password : %s \n, encPassword");
+		System.out.printf("username : %s \n", encUsername);
+		System.out.printf("password : %s \n", encPassword);
 		
 		String saveFile = "./src/main/webapp/WEB-INF/"
 				+ "spring/properties/db.connection.properties";

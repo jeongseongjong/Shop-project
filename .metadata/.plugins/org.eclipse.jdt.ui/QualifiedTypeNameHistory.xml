@@ -41,7 +41,6 @@
 <fullyQualifiedTypeName name="org.springframework.security.crypto.password.PasswordEncoder"/>
 <fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="org.jasypt.encryption.pbe.StandardPBEStringEncryptor"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="lombok.Getter"/>
@@ -58,6 +57,7 @@
 <fullyQualifiedTypeName name="com.biz.movie.config.NaverConfig"/>
 <fullyQualifiedTypeName name="org.springframework.core.io.InputStreamSource"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
-<fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="org.json.simple.parser.JSONParser"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>
