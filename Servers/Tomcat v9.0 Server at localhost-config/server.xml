@@ -150,7 +150,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       
-      <Context docBase="Mocozi" path="/mocoji" reloadable="true" source="org.eclipse.jst.jee.server:Mocozi"/></Host>
+      <Context docBase="SpMVC_90_MovieList" path="/movie" reloadable="true" source="org.eclipse.jst.jee.server:SpMVC_90_MovieList"/></Host>
     </Engine>
   </Service>
 </Server>

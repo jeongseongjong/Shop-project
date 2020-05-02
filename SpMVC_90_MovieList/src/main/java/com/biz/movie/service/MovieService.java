@@ -26,15 +26,15 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class MovieService {
 
-	private final String movie_url = "https://openapi.naver.com/v1/search/movie.json";
+	private final String naver_movie_url = "https://openapi.naver.com/v1/search/movie.json";
 
 	@Autowired
 	PageService pService;
 
-	public PageDTO getPage(String search, long currentPageNo) throws IOException, ParseException {
+	public PageDTO getPage(String cat, String search, long currentPageNo) throws IOException, ParseException {
 
 		// 전체 데이터 계산
-		String totalQuery = this.queryMovie(search);
+		String totalQuery = this.queryMovie(cat, search);
 		String totalString = this.getMovieString(totalQuery);
 		JSONObject totalJObject = this.strToJson(totalString);
 
@@ -52,9 +52,9 @@ public class MovieService {
 		return pageDTO;
 	}
 
-	public JSONArray getMovie(String search, long currentPageNo) throws ParseException, IOException {
+	public JSONArray getMovie(String cat, String search, long currentPageNo) throws ParseException, IOException {
 
-		PageDTO pageDTO = this.getPage(search, currentPageNo);
+		PageDTO pageDTO = this.getPage(cat, search, currentPageNo);
 
 		if (currentPageNo == 1) {
 			currentPageNo = 1;
@@ -63,7 +63,7 @@ public class MovieService {
 			currentPageNo = (currentPageNo - 1) * pageDTO.getListPerPage();
 		}
 
-		String queryString = this.queryMovie(search, currentPageNo, pageDTO.getListPerPage());
+		String queryString = this.queryMovie(cat, search, currentPageNo, pageDTO.getListPerPage());
 
 		String resString = this.getMovieString(queryString);
 
@@ -76,18 +76,18 @@ public class MovieService {
 
 	// search, start, display 값을 매개변수로 받아서
 	// start부터 display개수만큼 데이터를 가져오기 위한 queryString 생성
-	public String queryMovie(String search) throws UnsupportedEncodingException {
+	public String queryMovie(String cat, String search) throws UnsupportedEncodingException {
 		
 		String queryString = URLEncoder.encode(search, "UTF-8");
-		queryString = movie_url + "?query=" + queryString;
+		queryString = this.queryURL(cat) + "?query=" + queryString;
 		
 		return queryString;
 	}
 	
-	public String queryMovie(String search, long start, long display) throws UnsupportedEncodingException {
+	public String queryMovie(String cat, String search, long start, long display) throws UnsupportedEncodingException {
 		
 		String queryString = URLEncoder.encode(search, "UTF-8");
-		queryString = movie_url + "?query=" + queryString;
+		queryString = this.queryURL(cat) + "?query=" + queryString;
 		
 		// start와 display값을 query에 포함하면
 		// start부터 display 개수만큼 데이터를 보내라는 의미
@@ -155,5 +155,13 @@ public class MovieService {
 	public JSONArray getArray(JSONObject jObject, String keyString) {
 		
 		return (JSONArray) jObject.get(keyString);
+	}
+	
+	public String queryURL(String cat) {
+		String queryURL = naver_movie_url;
+		if(cat.equalsIgnoreCase("MOVIE")) {
+			queryURL = naver_movie_url;
+		}
+		return queryURL;
 	}
 }
