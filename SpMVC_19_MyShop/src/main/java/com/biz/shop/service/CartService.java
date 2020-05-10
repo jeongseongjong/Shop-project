@@ -72,7 +72,7 @@ public class CartService {
 								cartList.getP_qty().get(i));
 		}
 	}
-
+ 
 	public Integer cart_to_delivery(List<String> buyList) {
 
 		return cartDao.cart_to_delivery(buyList);

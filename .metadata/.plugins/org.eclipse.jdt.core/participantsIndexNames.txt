@@ -31,10 +31,10 @@ C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\34
 \SpMVC_06_NaverV2\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\903253077.index
 \SpMVC_99_ StudyDiary\src\main\java
-C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4078084514.index
-\SpMVC_27_Secure\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2635575240.index
 \mocoji-project-master\src\main\java
+C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4078084514.index
+\SpMVC_27_Secure\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\58792389.index
 \SpMVC_19_MyShop\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\661582363.index
@@ -53,6 +53,8 @@ C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\35
 \SpMVC_27_SecureV2\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\265906220.index
 \SpMVC_27_SecureV4\src\main\java
+C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3957705091.index
+\Naviya\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4236019995.index
 \SpMVC_90_Bucket\src\main\java
 C:\bizwork\shop_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1742087147.index
