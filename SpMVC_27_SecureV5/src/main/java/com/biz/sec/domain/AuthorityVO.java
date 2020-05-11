@@ -14,9 +14,11 @@ import lombok.ToString;
 @ToString
 @Builder
 public class AuthorityVO {
+	
 
 	private long id;
 	private String username;
 	private String authority;
+	
 	
 }
