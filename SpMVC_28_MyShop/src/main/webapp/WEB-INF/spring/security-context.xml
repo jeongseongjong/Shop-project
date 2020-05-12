@@ -25,7 +25,8 @@
 
 	<context:component-scan
 		base-package="com.biz.shop.service.auth" />
-	<bean id="authProvider"
+	
+	 <bean id="authProvider"
 		class="com.biz.shop.service.auth.AuthProviderImpl">
 		</bean>
 	<!-- 

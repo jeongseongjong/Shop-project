@@ -69,7 +69,7 @@
 				#{username},
 				#{password},
 				#{email},
-				#{enabled}
+				true
 			)
  	</insert>
  	

@@ -1,14 +1,22 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<%@ include file="/WEB-INF/views/include/include-head.jspf" %>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<h2>Shop</h2>
+<nav>
+	<ul>
+		<li>
+			<c:if test=""><a href="${rootPath}/user/login">login</a></c:if>
+		</li>
+		<li><a href="${rootPath}/user/join">join</a></li>
+		<li>mypage</li>
+	</ul>
+</nav>
 </body>
 </html>

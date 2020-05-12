@@ -1,5 +1,6 @@
 package com.biz.shop.service.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,19 +12,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.biz.shop.domain.UserDetailsVO;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class AuthProviderImpl implements AuthenticationProvider {
 
+	@Autowired
 	@Qualifier("userDetailsService")
-	private final UserDetailsService userDService;
+	private UserDetailsService userDService;
 	
 	/**
 	 * security-context에 bean으로 등록되어 있다
 	 */
-	
-	private final PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	/**
@@ -62,6 +62,8 @@ public class AuthProviderImpl implements AuthenticationProvider {
 				userVO, null,userVO.getAuthorities());
 	
 	}
+
+	
 
 	@Override
 	public boolean supports(Class<?> authentication) {

@@ -49,6 +49,7 @@ public class UserController {
 		return "login";
 	}
 	
+	
 	public String idcheck(String username) {
 		
 		boolean ret = userService.isExistsUserName(username);

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.biz.navy.dao.UserDao">
+
+	<select id="findByUserName" resultMap="userAndAuthorities">
+ 		SELECT u_id, 
+			username,
+			password, 
+			enabled, 
+			email, phone, address 
+			FROM tbl_users WHERE username = #{username} 
+ 	</select>
+
+ 	<select id="selectAll" resultMap="userAndAuthorities">
+ 		SELECT username,
+ 			password,
+ 			email, phone, address
+ 		 FROM tbl_users
+ 	</select>
+ 	
+ 	<resultMap type="userDetailsVO" id="userAndAuthorities">
+ 		<id column="id" property="id"/>
+ 		<result property="username" column="username"/>
+ 		<collection 
+ 				property="authorities" 
+ 				column="username"
+ 				ofType="authorityVO" 
+ 				select="findByUserNameAuthorities"
+ 				/>
+ 	</resultMap>
+ 	
+ 	<select id="findById" resultMap="userAndAuthorities">
+ 		SELECT 
+ 			username,
+ 			password,
+ 			enabled,
+ 			email,
+ 			phone,
+ 			address
+ 		
+ 		FROM tbl_users WHERE u_id = #{id}	
+ 	</select>
+ 	
+ 	<select id="findByUserNameAuthorities" resultType="authorityVO">
+ 		SELECT *
+ 		FROM authorities
+ 		WHERE username = #{username}
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="userDetailsVO">
+		INSERT INTO tbl_users
+		
+				(u_id,
+				user_name,
+				pass_word,
+				enabled
+				)
+				VALUES
+				(
+				SEQ_USERS_ID.NEXTVAL,
+				#{username,jdbcType=VARCHAR},
+				#{password,jdbcType=VARCHAR},
+				#{enabled}
+				)
+ 	
+ 	</insert>
+ 	
+ 	 <update id="update" parameterType="userDetailsVO">
+ 		UPDATE tbl_users
+ 		SET email = #{email},
+ 			phone = #{phone},
+ 			address = #{address}
+ 			
+ 		WHERE username = #{username}
+ 		
+ 	</update>
+
+</mapper> 
